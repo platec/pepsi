@@ -19,7 +19,7 @@ class Pepsi  {
     this.canvasElement = document.createElement('canvas');
     this.options.el.appendChild(this.canvasElement);
     this.canvas = new fabric.Canvas(this.canvasElement);
-    // this.createResizeObserver();
+    this.createResizeObserver();
   }
 
   add(data: fabric.Object) {
@@ -35,7 +35,9 @@ class Pepsi  {
           width,
           height
         } = entry.contentRect;
-        console.log(width, height);
+        const element = this.canvas.getElement();
+        element.style.width = width + 'px';
+        element.style.height = height + 'px'; 
         this.canvas.setWidth(width);
         this.canvas.setHeight(height);
       }

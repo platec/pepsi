@@ -1,13 +1,26 @@
 <template>
-  <div ref="editor" class="editor"></div>
+  <q-page class="editor-container">
+    <resources></resources>
+    <div ref="editor" class="editor"></div>
+    <properties></properties>
+  </q-page>
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import { fabric } from 'fabric';
 import { Pepsi } from '../pepsi';
+import Resources from '../components/Resources';
+import Properties from '../components/Properties';
 
-@Component
+@Component({
+  components: {
+    Resources,
+    Properties
+  }
+})
 export default class Editor extends Vue {
+  left = false;
+  right = false;
   $refs!: {
     editor: HTMLCanvasElement
   }
@@ -21,7 +34,7 @@ export default class Editor extends Vue {
       height: 20
     });
     const pepsi = new Pepsi({
-      el: this.$refs.editor
+      el: this.$refs.editor,
     });
     // "add" rectangle onto canvas
     pepsi.add(rect);
@@ -29,8 +42,10 @@ export default class Editor extends Vue {
 }
 </script>
 <style lang="scss" scoped>
+.editor-container {
+  display: flex;
+}
 .editor {
-  width: 100%;
-  height: 500px;;
+  flex: 1;
 }
 </style>
